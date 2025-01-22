@@ -26,6 +26,7 @@ def submit(userdata: str):
     return encryption
 
 def verify(data):
+    
     cipher = AES.new(key, mode=AES.MODE_CBC, iv=iv)
     print('Recieved cipher:  ', data)
     decryption_text = cipher.decrypt(data)
@@ -35,6 +36,12 @@ def verify(data):
         return True
     else:
         return False
+
+def flip_bit(ciphertext, position, bit_mask):
+    ciphertext_mutable = bytearray(ciphertext)
+    ciphertext_mutable[position] ^= bit_mask
+    return bytes(ciphertext_mutable)
+
 
 if __name__ == '__main__':
     xor = ord('/') ^ ord('=')
